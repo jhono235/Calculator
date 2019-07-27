@@ -9,30 +9,30 @@ import android.widget.TextView;
 
 public class MainActivity<decimalFormat> extends AppCompatActivity {
 
-    private double valueOne = Double.NaN;
-    private double valueTwo;
+    static final Button[] buttons = new Button[]{
 
+
+    };
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
     private static final char MULTIPLICATION = '*';
     private static final char DIVISION = '/';
+    TextView window, input;
+    Button zero, one, two, three, four, five, six, seven, eight, nine, add,
+            subtract, multiply, divide, clear, decimal, equals;
+    private double valueOne = Double.NaN;
+    private double valueTwo;
 
     private char CURRENT_ACTION;
 
-    TextView window, input;
-    Button zero, one, two,three,four,five,six,seven,eight,nine,add,
-            subtract,multiply,divide,clear,decimal,equals;
-
-    static final Button[] buttons = new Button[] {
-
-
-    };
-
+    public int counter =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        
 
         //Binding views
         window = findViewById(R.id.window);
@@ -56,112 +56,116 @@ public class MainActivity<decimalFormat> extends AppCompatActivity {
 
         equals = findViewById(R.id.equal);
 
-        decimal= findViewById(R.id.decimal);
+        decimal = findViewById(R.id.decimal);
         clear = findViewById(R.id.clear);
 
         //setting onClickListener of the buttons and decimal
-        zero.setOnClickListener(new View.OnClickListener(){
+        zero.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "0");
             }
         });
 
-        one.setOnClickListener(new View.OnClickListener(){
+        one.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "1");
             }
         });
 
-        two.setOnClickListener(new View.OnClickListener(){
+        two.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "2");
             }
         });
 
-        three.setOnClickListener(new View.OnClickListener(){
+        three.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "3");
             }
         });
 
-        four.setOnClickListener(new View.OnClickListener(){
+        four.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "4");
             }
         });
 
-        five.setOnClickListener(new View.OnClickListener(){
+        five.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "5");
             }
         });
 
-        six.setOnClickListener(new View.OnClickListener(){
+        six.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "6");
             }
         });
 
-        seven.setOnClickListener(new View.OnClickListener(){
+        seven.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "7");
             }
         });
 
-        eight.setOnClickListener(new View.OnClickListener(){
+        eight.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "8");
             }
         });
 
-        nine.setOnClickListener(new View.OnClickListener(){
+        nine.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 input.setText(input.getText() + "9");
             }
         });
 
-        decimal.setOnClickListener(new View.OnClickListener(){
+       /*
+        decimal.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
+
                 input.setText(input.getText() + ".");
             }
         });
+        */
 
         //setting onClickListener for clear
-        clear.setOnClickListener(new View.OnClickListener(){
+        clear.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
-                if(input.getText().length()>0) {
+            public void onClick(View view) {
+                if (input.getText().length() > 0) {
                     CharSequence currentText = input.getText();
-                    input.setText(currentText.subSequence(0,currentText.length()-1));
-                }
-                else {
+                    input.setText(currentText.subSequence(0, currentText.length() - 1));
+                } else {
                     valueOne = Double.NaN;
                     valueTwo = Double.NaN;
                     input.setText("");
                     window.setText("");
+                    counter = 0;
                 }
             }
         });
@@ -214,39 +218,63 @@ public class MainActivity<decimalFormat> extends AppCompatActivity {
                 window.setText(window.getText().toString() +
                         valueTwo + " = " + valueOne);
                 valueOne = Double.NaN;
-                CURRENT_ACTION ='0';
+                CURRENT_ACTION = '0';
 
             }
         });
 
 
-
     }
 
     //function for operator clicks.
-    private void compute(){
-        if (!Double.isNaN(valueOne)){
+    private void compute() {
+        if (!Double.isNaN(valueOne)) {
             valueTwo = Double.parseDouble(input.getText().toString());
             input.setText(null);
 
-            if(CURRENT_ACTION == ADDITION)
+            if (CURRENT_ACTION == ADDITION)
                 valueOne = this.valueOne + valueTwo;
-            else if(CURRENT_ACTION == SUBTRACTION)
+            else if (CURRENT_ACTION == SUBTRACTION)
                 valueOne = this.valueOne - valueTwo;
-            else if(CURRENT_ACTION == MULTIPLICATION)
+            else if (CURRENT_ACTION == MULTIPLICATION)
                 valueOne = this.valueOne * valueTwo;
-            else if(CURRENT_ACTION == DIVISION)
+            else if (CURRENT_ACTION == DIVISION)
                 valueOne = this.valueOne / valueTwo;
 
-        }
-        else{
-            try{
+        } else {
+            try {
                 valueOne = Double.parseDouble(input.getText().toString());
+            } catch (Exception e) {
             }
-            catch (Exception e) {}
         }
     }
 
 
+    public void click(View view) {
+        input.setText(((Button) view).getText().toString());
+    }
 
+
+
+    public void addDecimal(View view) {
+
+
+        while(counter==0) {
+            input.setText(input.getText() + ".");
+            counter++;
+
+
+
+        }
+
+
+
+
+
+
+    }
 }
+
+
+
+

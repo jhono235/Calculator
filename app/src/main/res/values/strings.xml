@@ -11,4 +11,7 @@
     <string name="_3">3</string>
     <string name="_0">0</string>
     <string name="c">c</string>
+    <string name="square_root_symbol">\u221a</string>
+    <string name="squared">\u00B2</string>
+    <string name="pi">\u03C0</string>
 </resources>
