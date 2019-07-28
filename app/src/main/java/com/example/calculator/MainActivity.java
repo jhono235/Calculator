@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -140,17 +141,7 @@ public class MainActivity<decimalFormat> extends AppCompatActivity {
             }
         });
 
-       /*
-        decimal.setOnClickListener(new View.OnClickListener() {
 
-
-            @Override
-            public void onClick(View view) {
-
-                input.setText(input.getText() + ".");
-            }
-        });
-        */
 
         //setting onClickListener for clear
         clear.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +246,24 @@ public class MainActivity<decimalFormat> extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("calcInput",input.getText().toString());
+        outState.putString("answerWindow",window.getText().toString());
+        outState.putInt("decHolder",counter);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        input.setText(savedInstanceState.getString("calcInput"));
+        window.setText(savedInstanceState.getString("answerWindow"));
+        counter = savedInstanceState.getInt("decHolder");
+
+
+    }
 
     public void addDecimal(View view) {
 
@@ -266,6 +275,10 @@ public class MainActivity<decimalFormat> extends AppCompatActivity {
 
 
         }
+
+
+
+
 
 
 
